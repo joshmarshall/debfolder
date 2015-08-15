@@ -2,11 +2,17 @@ import setuptools
 
 
 setuptools.setup(
-    name="debhelpers",
+    name="debfolder",
     version="0.1.0a",
-    description="A few tools for building Debian packages.",
+    description="A few tools for building Debian packages for Python.",
     author="Josh Marshall",
     author_email="catchjosh@gmail.com",
-    url="https://github.com/joshmarshall/pydeb-helpers",
+    url="https://github.com/joshmarshall/debfolder",
     license="http://www.apache.org/licenses/LICENSE-2.0",
+    entry_points={
+        "console_scripts": [
+            "parse_git_log = debfolder.git_helpers:main",
+            "debfolder = debfolder.setup_helpers:main"
+        ],
+    },
     packages=setuptools.find_packages(exclude=["tests", "dist"]))
