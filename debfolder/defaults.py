@@ -17,7 +17,7 @@ Description: {description}
     "rules": """#!/usr/bin/make -f
 
 %:
-    {build_command}
+\t{build_command}
 
 {extra_build_options}
 """
@@ -31,7 +31,7 @@ DEFAULT_OPTIONS = {
         "section": "python",
         "priority": "extra",
         "build_depends": [
-            "debhelper (>=9)", "python", "dh-virtualenv (>=0.6)",
+            "debhelper (>= 9)", "python", "dh-virtualenv (>= 0.6)",
             "python-dev", "git-core"
         ],
         "standards_version": "3.9.5",
@@ -42,7 +42,7 @@ DEFAULT_OPTIONS = {
     "rules": {
         "build_command": "dh $@ --with python-virtualenv",
         "extra_build_options": """overide_dh_virtualenv:
-    dh_virtualenv --python /usr/bin/python2.7 --setuptools
+\tdh_virtualenv --python /usr/bin/python2.7 --setuptools
     """
     }
 }

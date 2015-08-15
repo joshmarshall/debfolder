@@ -1,2 +1,3 @@
 debian/
 deb.json
+dist/
