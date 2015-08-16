@@ -1,6 +1,8 @@
 import argparse
 import json
 import os
+import sys
+
 from debfolder import defaults
 
 
@@ -16,8 +18,7 @@ def find_data_files(folder, filter_file=lambda x: True):
     return filtered_files
 
 
-def initialize_debian_folder(settings, directory):
-    settings = settings.copy()
+def update_settings_with_defaults(settings):
     file_values = settings.pop("defaults", {})
 
     for basename, file_settings in defaults.DEFAULT_OPTIONS.items():
@@ -45,6 +46,13 @@ def initialize_debian_folder(settings, directory):
     if len(settings):
         raise Exception("Unknown settings: {0}".format(settings.keys()))
 
+    return file_values
+
+
+def initialize_debian_folder(settings, directory):
+    settings = settings.copy()
+    file_values = update_settings_with_defaults(settings)
+
     directory_path = os.path.join(directory, "debian")
 
     if not os.path.exists(directory_path):
@@ -57,7 +65,7 @@ def initialize_debian_folder(settings, directory):
             debian_fp.write(content)
 
 
-def main():
+def main(sys_args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-s", "--settings_path", dest="settings_path", default=None)
@@ -67,7 +75,8 @@ def main():
         dest="changelog", action="store_true",
         default=False)
 
-    args = parser.parse_args()
+    sys_args = sys_args if sys_args is not None else sys.argv[1:]
+    args = parser.parse_args(sys_args)
     directory = args.directory or os.getcwd()
 
     settings_path = args.settings_path or os.path.join(directory, "deb.json")
