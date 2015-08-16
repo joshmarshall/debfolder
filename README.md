@@ -1,4 +1,5 @@
 # DebFolder
+[![Build Status](https://travis-ci.org/joshmarshall/debfolder.png?branch=master)](https://travis-ci.org/joshmarshall/debfolder)
 
 This project contains a few helpers for building /debian folders, primarily
 for Python projects (although it can be extended for others), and primarily
