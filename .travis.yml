@@ -1,7 +1,9 @@
 language: python
 install:
-- pip install -r requirements.txt
-- pip install -r dev-requirements.txt
+  - pip install -r requirements.txt
+  - pip install -r dev-requirements.txt
+  # because Travis broke it's install...
+  - pip install twine
 script: nosetests tests/ --with-coverage --cover-package debfolder
 deploy:
   provider: pypi
