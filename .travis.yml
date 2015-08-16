@@ -1,3 +1,5 @@
 language: python
-install: pip install -r dev-requirements.txt
+install:
+  - pip instlal -r requirements.txt
+  - pip install -r dev-requirements.txt
 script: nosetests tests/ --with-coverage --cover-package debfolder

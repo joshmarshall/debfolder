@@ -16,16 +16,16 @@ TEST_COMMIT = {
     "committer": "Joe <joe@email.com>"
 }
 
-EXPECTED_ENTRIES = ["""project (2015.0815.110741-hash) UNRELEASED; urgency=low
+EXPECTED_ENTRIES = ["""project (2015.0815.160741-hash) UNRELEASED; urgency=low
 
   * Commit message.
 
- -- Joe <joe@email.com>  Sat, 15 Aug 2015 11:07:41 +0000
-""", """project (2015.0815.000840-hash2) UNRELEASED; urgency=low
+ -- Joe <joe@email.com>  Sat, 15 Aug 2015 16:07:41 +0000
+""", """project (2015.0815.050840-hash2) UNRELEASED; urgency=low
 
   * Other commit message.
 
- -- Jane <jane@email.com>  Sat, 15 Aug 2015 00:08:40 +0000
+ -- Jane <jane@email.com>  Sat, 15 Aug 2015 05:08:40 +0000
 """]
 
 
@@ -71,7 +71,7 @@ class TestGitHelpers(unittest.TestCase):
 
     def test_generate_git_version_generates_timestamp_hash_version(self):
         version = git_helpers.generate_git_version(TEST_COMMIT)
-        self.assertEqual("2015.0815.110741-hash", version)
+        self.assertEqual("2015.0815.160741-hash", version)
 
     def test_generate_changelog_entry_formats_to_debian_specification(self):
         entry = git_helpers.generate_changelog_entry("project", TEST_COMMIT)
@@ -84,7 +84,7 @@ class TestGitHelpers(unittest.TestCase):
 
         expected = EXPECTED_ENTRIES[0].replace("UNRELEASED", "UPLOAD")
         expected = expected.replace("urgency=low", "urgency=high")
-        expected = expected.replace("2015.0815.110741-hash", "1.0.1-1")
+        expected = expected.replace("2015.0815.160741-hash", "1.0.1-1")
 
         self.assertEqual(expected, entry)
 
@@ -134,7 +134,7 @@ class TestGitHelpers(unittest.TestCase):
         self.add_git_log_format_result("%s", entries=1)
 
         version = git_helpers.get_current_version()
-        self.assertEqual("2015.0815.110741-hash", version)
+        self.assertEqual("2015.0815.160741-hash", version)
 
     def test_get_current_version_allows_custom_cwd_and_version(self):
         self.add_git_log_format_result("%cn <%ce>", entries=1)

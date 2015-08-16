@@ -9,6 +9,7 @@ setuptools.setup(
     author_email="catchjosh@gmail.com",
     url="https://github.com/joshmarshall/debfolder",
     license="http://www.apache.org/licenses/LICENSE-2.0",
+    install_requires=["pytz"],
     entry_points={
         "console_scripts": [
             "parse_git_log = debfolder.git_helpers:main",

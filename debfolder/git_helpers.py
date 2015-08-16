@@ -4,6 +4,8 @@ import os
 import sys
 import subprocess
 
+import pytz
+
 
 GIT_COMMAND = ["git", "log", "--pretty=format:{format}"]
 
@@ -23,7 +25,7 @@ CHANGE_ENTRY = """{project} ({version}) {upload_target}; urgency={urgency}
 
 
 def generate_git_version(commit):
-    date = datetime.fromtimestamp(int(commit["timestamp"]))
+    date = datetime.fromtimestamp(int(commit["timestamp"]), pytz.utc)
     return date.strftime("%Y.%m%d.%H%M%S") + "-" + commit["hash"]
 
 
@@ -31,7 +33,7 @@ def generate_changelog_entry(
         project, commit, upload_target="UNRELEASED", urgency="low",
         version=generate_git_version):
     version_string = version(commit)
-    date = datetime.fromtimestamp(int(commit["timestamp"]))
+    date = datetime.fromtimestamp(int(commit["timestamp"]), pytz.utc)
     commit_date = date.strftime("%a, %d %b %Y %H:%M:%S ") + "+0000"
     return CHANGE_ENTRY.format(
         project=project, version=version_string, subject=commit["message"],
