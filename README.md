@@ -31,6 +31,21 @@ Run `parse_git_log` inside a Git repository folder to print out a
 Debian-compatible changelog without creating a Debian folder or writing
 any files.
 
+The `install` option in `deb.json` allows additional files to be installed
+in specified folders. (It is a simple wrapper around debian/install and
+the dh_install behavior.)
+
+```json
+{
+    "project": "projectname",
+    ...
+    "install": {
+        "static/images/*.jpg": "/opt/projectname/static/images/",
+        "static/css/main.css": "/opt/projectname/static/css/main.css"
+    }
+}
+```
+
 ## Customizing
 
 There are a lot of customizable options in the deb.json file or by using the
