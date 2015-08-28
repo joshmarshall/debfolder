@@ -37,6 +37,16 @@ BASIC_SETTINGS = {
     "description": "Description"
 }
 
+INSTALL_SETTINGS = {
+    "project": "project",
+    "maintainer": "Joe <joe@email.com>",
+    "description": "Description",
+    "install": {
+        "foo/bar/*": "/dest/dir/bar/",
+        "foo/*": "/dest/dir/"
+    }
+}
+
 
 class TestSetupHelpers(unittest.TestCase):
 
@@ -67,6 +77,18 @@ class TestSetupHelpers(unittest.TestCase):
 
     # TODO: check optional and required attributes
     # TODO: check merge and coerce behavior
+
+    def test_initialize_debian_folder_with_install(self):
+        setup_helpers.initialize_debian_folder(INSTALL_SETTINGS, self.tempdir)
+        full_path = os.path.join(self.tempdir, "debian", "install")
+        self.assertTrue(os.path.exists(full_path))
+        with open(full_path) as install_fp:
+            contents = dict([
+                a.strip().split(" ") for a in install_fp.readlines()
+                if a.strip()
+            ])
+
+        self.assertEqual(contents, INSTALL_SETTINGS["install"])
 
     @mock.patch("debfolder.git_helpers.generate_changelog_entry")
     @mock.patch("debfolder.git_helpers.parse_commits")

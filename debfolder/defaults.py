@@ -1,6 +1,8 @@
 DEBIAN_FILES = {
     "compat": """{version}
 """,
+    "install": """{install}
+""",
     "control": """Source: {project}
 Section: {section}
 Priority: {priority}
@@ -44,6 +46,9 @@ DEFAULT_OPTIONS = {
         "extra_build_options": """overide_dh_virtualenv:
 \tdh_virtualenv --python /usr/bin/python2.7 --setuptools
     """
+    },
+    "install": {
+        "install": ""
     }
 }
 
@@ -56,12 +61,14 @@ REQUIRED_SETTINGS = {
 OPTIONAL_SETTINGS = {
     "depends": "control",
     "build_depends": "control",
-    "architecture": "control"
+    "architecture": "control",
+    "install": "install"
 }
 
 MERGE_COMMANDS = {
     "depends": lambda x, y: x + y,
     "build_depends": lambda x, y: x + y,
+    "install": lambda x, y: "\n".join([" ".join(i) for i in y.items()] + [x])
 }
 
 DEFAULT_MERGE = lambda x, y: y
