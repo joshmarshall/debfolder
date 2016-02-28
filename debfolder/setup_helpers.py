@@ -43,8 +43,10 @@ def update_settings_with_defaults(settings):
         for key, coercer in keys.items():
             file_values[basename][key] = coercer(file_values[basename][key])
 
-    if len(settings):
-        raise Exception("Unknown settings: {0}".format(settings.keys()))
+    for key in settings:
+        if key not in file_values:
+            raise Exception("Unknown setting: {0}".format(key))
+        file_values[key].update(settings[key])
 
     return file_values
 

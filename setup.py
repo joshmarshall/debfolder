@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="debfolder",
-    version="0.2.0",
+    version="0.2.1",
     description="A few tools for building Debian packages for Python.",
     author="Josh Marshall",
     author_email="catchjosh@gmail.com",

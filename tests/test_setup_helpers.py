@@ -6,6 +6,7 @@ import unittest
 
 import mock
 
+from debfolder import defaults
 from debfolder import setup_helpers
 
 
@@ -44,6 +45,16 @@ INSTALL_SETTINGS = {
     "install": {
         "foo/bar/*": "/dest/dir/bar/",
         "foo/*": "/dest/dir/"
+    }
+}
+
+CUSTOM_RULES_SETTINGS = {
+    "project": "project",
+    "maintainer": "Joe <joe@email.com>",
+    "description": "Description",
+    "rules": {
+        "build_command": "dh $@",
+        "extra_build_options": ""
     }
 }
 
@@ -89,6 +100,18 @@ class TestSetupHelpers(unittest.TestCase):
             ])
 
         self.assertEqual(contents, INSTALL_SETTINGS["install"])
+
+    def test_initialize_debian_folder_with_custom_rules(self):
+        setup_helpers.initialize_debian_folder(
+            CUSTOM_RULES_SETTINGS, self.tempdir)
+        full_path = os.path.join(self.tempdir, "debian", "rules")
+        self.assertTrue(os.path.exists(full_path))
+        with open(full_path) as install_fp:
+            contents = install_fp.read()
+
+        self.assertEqual(
+            contents, defaults.DEBIAN_FILES["rules"].format(
+                **CUSTOM_RULES_SETTINGS["rules"]))
 
     @mock.patch("debfolder.git_helpers.generate_changelog_entry")
     @mock.patch("debfolder.git_helpers.parse_commits")
