@@ -83,7 +83,7 @@ def main(sys_args=None):
 
     settings_path = args.settings_path or os.path.join(directory, "deb.json")
     with open(settings_path, "rb") as settings_fp:
-        settings = json.loads(settings_fp.read())
+        settings = json.loads(settings_fp.read().decode("utf8"))
 
     initialize_debian_folder(settings, directory)
 
@@ -97,7 +97,7 @@ def main(sys_args=None):
 
         changelog_path = os.path.join(directory, "debian", "changelog")
         with open(changelog_path, "wb") as changelog_fp:
-            changelog_fp.write("\n".join(changelog))
+            changelog_fp.write("\n".join(changelog).encode("utf8"))
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ def parse_commits(cwd=None, entries=100):
             commits.setdefault(i, {})
             commits[i][attribute] = commit_lines[i]
 
-    indexes = commits.keys()
+    indexes = list(commits.keys())
     indexes.sort()
 
     return [commits[i] for i in indexes]

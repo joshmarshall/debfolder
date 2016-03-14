@@ -121,7 +121,7 @@ class TestSetupHelpers(unittest.TestCase):
 
         settings_file = os.path.join(self.tempdir, "deb.json")
         with open(settings_file, "wb") as settings_fp:
-            settings_fp.write(json.dumps(BASIC_SETTINGS))
+            settings_fp.write(json.dumps(BASIC_SETTINGS).encode("utf8"))
             settings_fp.flush()
 
         parameters = ["-s", settings_file, "-d", self.tempdir, "-c"]
@@ -135,7 +135,7 @@ class TestSetupHelpers(unittest.TestCase):
         self.assertTrue(os.path.exists(changelog_file))
 
         with open(changelog_file, "rb") as changelog_fp:
-            self.assertEqual("MOCK\nCHANGELOG", changelog_fp.read())
+            self.assertEqual(b"MOCK\nCHANGELOG", changelog_fp.read())
 
         mock_commits.assert_called_with(cwd=self.tempdir)
         mock_changelog.assert_any_call("project", {"a": 1})

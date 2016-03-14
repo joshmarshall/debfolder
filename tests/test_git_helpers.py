@@ -1,4 +1,8 @@
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 import unittest
 
 import mock
@@ -142,10 +146,8 @@ class TestGitHelpers(unittest.TestCase):
         self.add_git_log_format_result("%h", entries=1)
         self.add_git_log_format_result("%s", entries=1)
 
-        version_gen = lambda x: x["hash"]
-
         version = git_helpers.get_current_version(
-            cwd="/path", version=version_gen)
+            cwd="/path", version=lambda x: x["hash"])
         self.assertEqual("hash", version)
         self.assert_cwd_equals("/path")
 
