@@ -10,7 +10,7 @@ install:
   - pip install -r dev-requirements.txt
   # because Travis broke it's install...
   - pip install twine
-script: nosetests tests/ --with-coverage --cover-package debfolder
+script: nosetests tests/
 deploy:
   provider: pypi
   user: joshmarshall
