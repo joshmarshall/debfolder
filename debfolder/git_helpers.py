@@ -53,7 +53,7 @@ def parse_commits(cwd=None, entries=100):
         ]
         for i in range(len(commit_lines)):
             commits.setdefault(i, {})
-            commits[i][attribute] = commit_lines[i]
+            commits[i][attribute] = commit_lines[i].decode("utf8")
 
     indexes = list(commits.keys())
     indexes.sort()

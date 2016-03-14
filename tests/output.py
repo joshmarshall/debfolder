@@ -20,4 +20,4 @@ def create_git_log_output(format_str, entries):
         for key, value in entry.items():
             output = output.replace(key, value)
         output_lines.append(output)
-    return "\n".join(output_lines)
+    return "\n".join(output_lines).encode("utf8")
