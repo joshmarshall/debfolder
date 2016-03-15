@@ -20,6 +20,16 @@ Create a `deb.json` file that contains at minimum the following values:
 }
 ```
 
+You will likely also want to add the following sections for Python-based
+projects:
+
+```json
+{
+    "build_depends": ["python", "python-dev"],
+    "depends": ["python"]
+}
+```
+
 This file should ideally live inside the project folder, in the same
 directory as the `setup.py` or `Makefile` for the project you wish to build.
 
@@ -33,7 +43,7 @@ any files.
 
 The `install` option in `deb.json` allows additional files to be installed
 in specified folders. (It is a simple wrapper around debian/install and
-the dh_install behavior.)
+the dh\_install behavior.)
 
 ```json
 {
@@ -66,4 +76,4 @@ YYYY.MMDD.HHMMSS-HASH or
 up-to-date manually. This is especially useful in continuous integration /
 continuous deployment environments.
 
-*Feedback invited! Tests are missing!*
+*Feedback invited!*
