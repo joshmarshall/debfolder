@@ -33,19 +33,16 @@ DEFAULT_OPTIONS = {
         "section": "python",
         "priority": "extra",
         "build_depends": [
-            "debhelper (>= 9)", "python", "dh-virtualenv (>= 0.6)",
-            "python-dev", "git-core"
+            "debhelper (>= 9)", "dh-virtualenv (>= 0.10)", "git-core"
         ],
         "standards_version": "3.9.5",
-        "pre_depends": ["dpkg", "python", "${misc:Pre-Depends}"],
-        "depends": ["${python:Depends}", "${misc:Depends}"],
+        "pre_depends": [],
+        "depends": [],
         "architecture": "any"
     },
     "rules": {
         "build_command": "dh $@ --with python-virtualenv",
-        "extra_build_options": """overide_dh_virtualenv:
-\tdh_virtualenv --python /usr/bin/python2.7 --setuptools
-    """
+        "extra_build_options": ""
     },
     "install": {
         "install": ""
@@ -71,7 +68,10 @@ MERGE_COMMANDS = {
     "install": lambda x, y: "\n".join([" ".join(i) for i in y.items()] + [x])
 }
 
-DEFAULT_MERGE = lambda x, y: y
+
+def DEFAULT_MERGE(x, y):
+    return y
+
 
 COERCE_COMMANDS = {
     "control": {
