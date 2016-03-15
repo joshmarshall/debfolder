@@ -33,7 +33,7 @@ DEFAULT_OPTIONS = {
         "section": "python",
         "priority": "extra",
         "build_depends": [
-            "debhelper (>= 9)", "dh-virtualenv (>= 0.10)", "git-core"
+            "debhelper (>= 9)", "dh-virtualenv (>= 0.6)", "git-core"
         ],
         "standards_version": "3.9.5",
         "pre_depends": [],
