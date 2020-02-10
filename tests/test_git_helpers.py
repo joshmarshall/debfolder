@@ -4,8 +4,7 @@ except ImportError:
     from io import StringIO
 
 import unittest
-
-import mock
+from unittest import mock
 
 from debfolder import git_helpers
 

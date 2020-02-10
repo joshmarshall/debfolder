@@ -3,8 +3,7 @@ import os
 import shutil
 import tempfile
 import unittest
-
-import mock
+from unittest import mock
 
 from debfolder import defaults
 from debfolder import setup_helpers
